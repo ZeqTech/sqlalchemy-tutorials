@@ -1,0 +1,4 @@
+.pytest_cache/
+*.db
+**/__pycache__*
+screenshots/
