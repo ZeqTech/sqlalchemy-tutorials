@@ -27,19 +27,21 @@ class SensitiveInformation(Base):
 
 Base.metadata.create_all(engine)
 
-session.add_all(
-    [
-        User(
-            name=f"User {y}",
-            sensitive_information=[
-                SensitiveInformation(
-                    content=f"This is sensitive information for {y * 2 + x}"
-                )
-                for x in range(2)
-            ]
-        ) for y in range(10)
-    ]
-)
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    session.add_all(
+        [
+            User(
+                name=f"User {y}",
+                sensitive_information=[
+                    SensitiveInformation(
+                        content=f"This is sensitive information for {y * 2 + x}"
+                    )
+                    for x in range(2)
+                ]
+            ) for y in range(10)
+        ]
+    )
 
 users = session.query(User).all()
 for user in users:

@@ -38,21 +38,24 @@ class User(BaseModel):
 
 Base.metadata.create_all(engine)
 
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    # Creating users
+    user1 = User(username="Zeq Tech 1" )
+    user2 = User(username="Zeq Tech 2" )
+    user3 = User(username="Zeq Tech 3" )
 
-# Creating users
-user1 = User(username="Zeq Tech 1" )
-user2 = User(username="Zeq Tech 2" )
-user3 = User(username="Zeq Tech 3" )
+    # Creating relationships
+    user1.followers.append(user2)
+    user1.followers.append(user3)
+    user2.followers.append(user3)
+    user3.followers.append(user1)
 
-# Creating relationships
-user1.followers.append(user2)
-user1.followers.append(user3)
-user2.followers.append(user3)
-user3.followers.append(user1)
+    # Adding users to the session and committing changes to the database
+    session.add_all([user1, user2, user3])
+    session.commit()
 
-# Adding users to the session and committing changes to the database
-session.add_all([user1, user2, user3])
-session.commit()
+user1, user2, user3 = session.query(User).limit(3).all()
 
 print(f"{user1.followers = }")
 print(f"{user2.followers = }")

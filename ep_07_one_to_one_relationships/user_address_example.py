@@ -1,8 +1,7 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-engine = create_engine('sqlite:///ep_07_one_to_one_relationships/database_1.db')
+engine = create_engine('sqlite:///ep_07_one_to_one_relationships.db')
 Base = declarative_base()
 
 class User(Base):
@@ -23,11 +22,13 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-new_user = User(name='John Doe')
-new_address = Address(email='john@example.com', user=new_user)
-session.add(new_user)
-session.add(new_address)
-session.commit()
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    new_user = User(name='John Doe')
+    new_address = Address(email='john@example.com', user=new_user)
+    session.add(new_user)
+    session.add(new_address)
+    session.commit()
 
 user = session.query(User).filter_by(name='John Doe').first()
 print(f"User: {user.name}, Address: {user.address.email}")

@@ -32,20 +32,22 @@ class Log(Base):
 
 Base.metadata.create_all(engine)
 
-session.add_all(
-    [
-        User(
-            name=f"User {y}",
-            logs=[
-                Log(
-                    message=f"User did this thing"
-                )
-                for x in range(3)
-            ]
-        ) for y in range(10)
-    ]
-)
-session.commit()
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    session.add_all(
+        [
+            User(
+                name=f"User {y}",
+                logs=[
+                    Log(
+                        message=f"User did this thing"
+                    )
+                    for x in range(3)
+                ]
+            ) for y in range(10)
+        ]
+    )
+    session.commit()
 
 users = session.query(User).all()
 for user in users:

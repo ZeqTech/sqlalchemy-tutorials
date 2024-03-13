@@ -5,12 +5,14 @@ from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=engine)
 session = Session()
 
-session.add(User(name="Iron Man", age=23))
-session.add(User(name="Coding Man", age=56))
-session.add(User(name="Banana Man", age=78))
-session.add(User(name="Zeq", age=99))
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    session.add(User(name="Iron Man", age=23))
+    session.add(User(name="Coding Man", age=56))
+    session.add(User(name="Banana Man", age=78))
+    session.add(User(name="Zeq", age=99))
 
-session.commit()
+    session.commit()
 
 # query all users
 users_all = session.query(User).all()

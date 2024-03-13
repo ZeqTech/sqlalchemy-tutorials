@@ -40,9 +40,11 @@ class Content(Base):
 # Create the database tables
 Base.metadata.create_all(engine)
 
-user = User(name='Zeq Tech', posts=[Post(content=Content(data="This is some content"))])
-session.add(user)
-session.commit()
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    user = User(name='Zeq Tech', posts=[Post(content=Content(data="This is some content"))])
+    session.add(user)
+    session.commit()
 
 user = session.scalar(select(User))
 print(f"\nUser {user.id}: {user.name} - {user.posts[0].content.data} \n")

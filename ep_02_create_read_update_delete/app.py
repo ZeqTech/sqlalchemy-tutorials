@@ -6,21 +6,24 @@ session = Session()
 
 # ===================================================================================
 # CREATE
-# Create one new User
-user = User(name='John Doe 1', age=30)
-session.add(user)
-session.commit()
 
-# Create multiple Users
-user_1 = User(name='John Doe 2', age=30)
-user_2 = User(name='Andrew Pip', age=25)
-user_3 = User(name='Iron Man', age=57)
-user_4 = User(name='Richard Rodriguez', age=25)
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    # Create one new User
+    user = User(name='John Doe 1', age=30)
+    session.add(user)
+    session.commit()
 
-session.add(user_1)
-session.add(user_2)
-session.add_all([user_3, user_4])
-session.commit()
+    # Create multiple Users
+    user_1 = User(name='John Doe 2', age=30)
+    user_2 = User(name='Andrew Pip', age=25)
+    user_3 = User(name='Iron Man', age=57)
+    user_4 = User(name='Richard Rodriguez', age=25)
+
+    session.add(user_1)
+    session.add(user_2)
+    session.add_all([user_3, user_4])
+    session.commit()
 
 # ===================================================================================
 # READ

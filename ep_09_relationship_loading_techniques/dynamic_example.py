@@ -32,17 +32,19 @@ class Post(Base):
 
 Base.metadata.create_all(engine)
 
-session.add(
-    User(
-        name="Zeq",
-        posts=[
-            Post(
-                content=f"Content {x}"
-            ) for x in range(50)
-        ]
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    session.add(
+        User(
+            name="Zeq",
+            posts=[
+                Post(
+                    content=f"Content {x}"
+                ) for x in range(50)
+            ]
+        )
     )
-)
-session.commit()
+    session.commit()
 
 user = session.query(User).filter_by(name='Zeq').first()
 print(user.posts)

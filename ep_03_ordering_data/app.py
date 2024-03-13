@@ -9,12 +9,15 @@ session = Session()
 names = ["Andrew Pip", "Iron Man", "John Doe", "Jane Doe"]
 ages = [20, 21, 22, 23, 25, 27, 30, 35, 60]
 
-# Create random Users
-for x in range(20):
-    user = User(name=random.choice(names), age=random.choice(ages))
-    session.add(user)
 
-session.commit()
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    # Create random Users
+    for x in range(20):
+        user = User(name=random.choice(names), age=random.choice(ages))
+        session.add(user)
+
+    session.commit()
 
 
 # Query all users ordered by age (ascending)

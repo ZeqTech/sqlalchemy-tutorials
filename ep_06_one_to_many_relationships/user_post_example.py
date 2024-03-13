@@ -47,18 +47,23 @@ Base.metadata.create_all(engine)
 
 session = Session()
 
-# Creating user
-user = User(name="Zeq Tech", age=999)
+# If there is data in the database, dont add more data
+if session.query(User).count() < 1:
+    # Creating user
+    user = User(name="Zeq Tech", age=999)
 
-# Creating addresses
-post = Post(title="Subscribe", content="Subscribe to Zeq Tech!", likes=999, dislikes=0)
+    # Creating addresses
+    post = Post(title="Subscribe", content="Subscribe to Zeq Tech!", likes=999, dislikes=0)
 
-# Associating addresses with users
-user.posts.append(post)
+    # Associating addresses with users
+    user.posts.append(post)
 
-# Adding users and addresses to the session and committing changes to the database
-session.add(user)
-session.commit()
+    # Adding users and addresses to the session and committing changes to the database
+    session.add(user)
+    session.commit()
+
+post = session.query(Post).first()
+user = session.query(User).first()
 
 print(f'{post.user = }')
 print(f"{user.posts = }")
