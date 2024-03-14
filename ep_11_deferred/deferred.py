@@ -3,7 +3,7 @@ from sqlalchemy.orm import (DeclarativeBase, Mapped, defer, deferred,
                             mapped_column, sessionmaker, undefer,
                             undefer_group)
 
-engine = create_engine("sqlite:///database.db", echo=True)
+engine = create_engine("sqlite:///ep_11_deferred.db", echo=True)
 session = sessionmaker(bind=engine)()
 
 
