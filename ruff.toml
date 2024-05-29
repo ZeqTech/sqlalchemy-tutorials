@@ -1,0 +1,46 @@
+# Assume Python 3.11
+target-version = "py311"
+
+line-length = 88
+indent-width = 4
+
+[lint]
+ignore = ["F821", "E402"]
+exclude = [
+    "__init__.py",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+
+[format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = false
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-line-length = "dynamic"

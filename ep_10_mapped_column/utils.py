@@ -1,3 +1,8 @@
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
+
 from typing import Optional
 
 from sqlalchemy import BigInteger, SmallInteger, String

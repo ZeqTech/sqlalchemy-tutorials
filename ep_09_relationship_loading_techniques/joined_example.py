@@ -1,16 +1,20 @@
-from time import perf_counter
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
 
 from sqlalchemy import Column, ForeignKey, Integer, String, Text, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-db_url = "sqlite:///ep_09_joined_database.db"
+db_url = 'sqlite:///ep_09_joined_database.db'
 
-engine = create_engine(db_url, echo=True) # important
+engine = create_engine(db_url, echo=True)  # important
 
 Session = sessionmaker(bind=engine)
 session = Session()
 
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -21,6 +25,7 @@ class User(Base):
     def __repr__(self):
         return f'<User {self.name} >'
 
+
 class Post(Base):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
@@ -30,6 +35,7 @@ class Post(Base):
     def __repr__(self):
         return f'<Post {self.id} >'
 
+
 Base.metadata.create_all(engine)
 
 # If there is data in the database, dont add more data
@@ -37,11 +43,10 @@ if session.query(User).count() < 1:
     session.add_all(
         [
             User(
-                name=f"User {x}",
-                latest_post=Post(
-                        content=f"This is the content for {x}"
-                    )
-            ) for x in range(10)
+                name=f'User {x}',
+                latest_post=Post(content=f'This is the content for {x}'),
+            )
+            for x in range(10)
         ]
     )
     session.commit()

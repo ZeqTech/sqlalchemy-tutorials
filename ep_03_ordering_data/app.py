@@ -1,12 +1,17 @@
 import random
 
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
+
 from models import User, engine
 from sqlalchemy.orm import sessionmaker
 
 Session = sessionmaker(bind=engine)
 session = Session()
 
-names = ["Andrew Pip", "Iron Man", "John Doe", "Jane Doe"]
+names = ['Andrew Pip', 'Iron Man', 'John Doe', 'Jane Doe']
 ages = [20, 21, 22, 23, 25, 27, 30, 35, 60]
 
 

@@ -1,8 +1,12 @@
-from sqlalchemy import (Column, ForeignKey, Integer, String, Table,
-                        create_engine)
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
+
+from sqlalchemy import Column, ForeignKey, Integer, String, Table, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-db_url = "sqlite:///ep_08_table_var.db"
+db_url = 'sqlite:///ep_08_table_var.db'
 
 engine = create_engine(db_url)
 
@@ -12,22 +16,31 @@ session = Session()
 Base = declarative_base()
 
 # Association table
-student_course_link = Table('student_course', Base.metadata,
+student_course_link = Table(
+    'student_course',
+    Base.metadata,
     Column('student_id', Integer, ForeignKey('students.id')),
-    Column('course_id', Integer, ForeignKey('courses.id'))
+    Column('course_id', Integer, ForeignKey('courses.id')),
 )
+
 
 class Student(Base):
     __tablename__ = 'students'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    courses = relationship("Course", secondary=student_course_link, back_populates="students")
+    courses = relationship(
+        'Course', secondary=student_course_link, back_populates='students'
+    )
+
 
 class Course(Base):
     __tablename__ = 'courses'
     id = Column(Integer, primary_key=True)
     title = Column(String)
-    students = relationship("Student", secondary=student_course_link, back_populates="courses")
+    students = relationship(
+        'Student', secondary=student_course_link, back_populates='courses'
+    )
+
 
 Base.metadata.create_all(engine)
 

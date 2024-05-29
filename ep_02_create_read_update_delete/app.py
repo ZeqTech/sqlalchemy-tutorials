@@ -1,3 +1,8 @@
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
+
 from models import User, engine
 from sqlalchemy.orm import sessionmaker
 
@@ -43,7 +48,7 @@ print(user)
 
 # Loop over each User
 for user in users:
-    print(f"User id: {user.id}, name: {user.name}, age: {user.age}")
+    print(f'User id: {user.id}, name: {user.name}, age: {user.age}')
 
 # Get first user from the data
 user_first = session.query(User).first()

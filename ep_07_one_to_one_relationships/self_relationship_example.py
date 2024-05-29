@@ -1,10 +1,13 @@
-from datetime import datetime
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
 
-from sqlalchemy import (Column, DateTime, ForeignKey, Integer, String, Table,
-                        create_engine)
+
+from sqlalchemy import Column, ForeignKey, Integer, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-db_url = "sqlite:///ep_07_one_to_one_self_relationships.db"
+db_url = 'sqlite:///ep_07_one_to_one_self_relationships.db'
 
 engine = create_engine(db_url)
 
@@ -13,6 +16,7 @@ session = Session()
 
 Base = declarative_base()
 
+
 class Node(Base):
     __tablename__ = 'nodes'
 
@@ -20,10 +24,11 @@ class Node(Base):
     value = Column(Integer, nullable=False)
 
     node_id = Column(Integer, ForeignKey('nodes.id'))
-    next_node = relationship("Node", remote_side=[id], uselist=False, post_update=True)
+    next_node = relationship('Node', remote_side=[id], uselist=False, post_update=True)
 
     def __repr__(self):
-        return f"<Node {self.id} value={self.value}, next node id={self.next_node.id}>"
+        return f'<Node {self.id} value={self.value}, next node id={self.next_node.id}>'
+
 
 Base.metadata.create_all(engine)
 

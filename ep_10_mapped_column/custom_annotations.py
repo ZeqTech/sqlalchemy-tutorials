@@ -1,11 +1,15 @@
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
+
 from typing import Optional
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from typing_extensions import Annotated
 from utils import int_big, str_20, str_100
 
-engine = create_engine("sqlite:///ep_10_custom_annotations.db", echo=True)
+engine = create_engine('sqlite:///ep_10_custom_annotations.db', echo=True)
 
 
 class Base(DeclarativeBase):
@@ -13,12 +17,14 @@ class Base(DeclarativeBase):
         int: int_big,
     }
 
+
 class User(Base):
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(primary_key=True)
     first_name: Mapped[Optional[str_20]]
     last_name: Mapped[Optional[str_100]]
+
 
 # Create the database tables
 Base.metadata.create_all(engine)

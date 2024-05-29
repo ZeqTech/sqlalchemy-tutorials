@@ -2,4 +2,10 @@
 *.db
 **/__pycache__*
 screenshots/
-ep_1*/
+ep_1[4-9]*/
+crash_course/
+.*x
+presentations/
+example/
+a.txt
+.vscode

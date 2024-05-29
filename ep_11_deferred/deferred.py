@@ -1,9 +1,19 @@
-from sqlalchemy import Column, ForeignKey, String, create_engine
-from sqlalchemy.orm import (DeclarativeBase, Mapped, defer, deferred,
-                            mapped_column, sessionmaker, undefer,
-                            undefer_group)
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
 
-engine = create_engine("sqlite:///ep_11_deferred.db", echo=True)
+from sqlalchemy import Column, String, create_engine
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    deferred,
+    mapped_column,
+    sessionmaker,
+    undefer,
+)
+
+engine = create_engine('sqlite:///ep_11_deferred.db', echo=True)
 session = sessionmaker(bind=engine)()
 
 
@@ -12,7 +22,7 @@ class Base(DeclarativeBase):
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = 'users'
 
     nickname: Mapped[str] = mapped_column(String)
     first_name: Mapped[str] = deferred(mapped_column(String))
@@ -20,7 +30,7 @@ class User(Base):
     other_value: Mapped[str] = mapped_column(String, deferred=True)
 
     def __repr__(self) -> str:
-        return f"< User: {self.id} - {self.nickname} >"
+        return f'< User: {self.id} - {self.nickname} >'
 
 
 # Create the database tables
@@ -29,17 +39,14 @@ Base.metadata.create_all(engine)
 # If there is data in the database, dont add more data
 if session.query(User).count() < 1:
     user = User(
-        nickname="ZT",
-        first_name="Zeq",
-        last_name="Tech",
-        other_value="secret value"
+        nickname='ZT', first_name='Zeq', last_name='Tech', other_value='secret value'
     )
     session.add(user)
     session.commit()
 
 
 # undefer nothing
-print("\nUndefer Nothing")
+print('\nUndefer Nothing')
 user = session.query(User).first()
 print(user)
 print(user.first_name)
@@ -49,7 +56,7 @@ print(user.other_value)
 # close the session to show deferring
 session.close()
 
-print("\nUndefer One Column")
+print('\nUndefer One Column')
 # undefer one column
 user = session.query(User).options(undefer(User.first_name)).first()
 print(user)
@@ -60,7 +67,7 @@ print(user.other_value)
 # close the session to show deferring
 session.close()
 
-print("\nUndefer One Column")
+print('\nUndefer One Column')
 user = session.query(User).options(undefer(User.last_name)).first()
 print(user)
 print(user.first_name)
@@ -70,9 +77,13 @@ print(user.other_value)
 # close the session to show deferring
 session.close()
 
-print("\nUndefer Multiple Column")
+print('\nUndefer Multiple Column')
 # undefer multiple columns
-user = session.query(User).options(undefer(User.last_name), undefer(User.other_value)).first()
+user = (
+    session.query(User)
+    .options(undefer(User.last_name), undefer(User.other_value))
+    .first()
+)
 print(user)
 print(user.first_name)
 print(user.last_name)

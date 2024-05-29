@@ -1,8 +1,12 @@
-from sqlalchemy import (Column, ForeignKey, Integer, String, Table,
-                        create_engine)
+# =============================================================
+# |                 Created By: ZeqTech                       |
+# |         YouTube: https://www.youtube.com/@zeqtech         |
+# =============================================================
+
+from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-db_url = "sqlite:///ep_08_table_class.db"
+db_url = 'sqlite:///ep_08_table_class.db'
 
 engine = create_engine(db_url)
 
@@ -11,6 +15,7 @@ session = Session()
 
 Base = declarative_base()
 
+
 # Association table
 class StudentCourse(Base):
     __tablename__ = 'student_course'
@@ -18,17 +23,24 @@ class StudentCourse(Base):
     student_id = Column('student_id', Integer, ForeignKey('students.id'))
     course_id = Column('course_id', Integer, ForeignKey('courses.id'))
 
+
 class Student(Base):
     __tablename__ = 'students'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    courses = relationship("Course", secondary="student_course", back_populates="students")
+    courses = relationship(
+        'Course', secondary='student_course', back_populates='students'
+    )
+
 
 class Course(Base):
     __tablename__ = 'courses'
     id = Column(Integer, primary_key=True)
     title = Column(String)
-    students = relationship("Student", secondary="student_course", back_populates="courses")
+    students = relationship(
+        'Student', secondary='student_course', back_populates='courses'
+    )
+
 
 Base.metadata.create_all(engine)
 
