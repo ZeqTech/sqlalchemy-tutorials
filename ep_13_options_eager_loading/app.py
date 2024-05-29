@@ -48,7 +48,7 @@ print(query)
 
 print('=' * 40)
 print('\nLoading with the: `joinedload` function')
-query = session.query(User).options(joinedload(User.posts)).all()
+query = session.query(User).options(joinedload(User.posts))
 print(query)
 print(query.all())
 
@@ -148,3 +148,20 @@ query = session.query(User).options(
     joinedload(User.posts).joinedload(Post.detail).load_only(Detail.content)
 )
 print(query)
+
+# =============================================================================================
+# Multiple loadings
+print('=' * 40)
+print('\nSub Relationship loading')
+query = session.query(User).options(selectinload(User.posts).options(joinedload(Post.detail)))
+print(query)
+print(query.all())
+
+print('=' * 40)
+print('\nMultiple relationship loading')
+query = session.query(User).options(
+    selectinload(User.posts),
+    # joinedload(User.<some other relationship on the user table>)
+)
+print(query)
+print(query.all())
