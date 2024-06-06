@@ -2,6 +2,7 @@
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
+# Related Video: https://www.youtube.com/watch?v=WKbJ1txwmeQ
 
 from sqlalchemy import Column, String, create_engine
 from sqlalchemy.orm import (

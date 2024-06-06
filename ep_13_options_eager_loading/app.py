@@ -2,6 +2,7 @@
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
+# Related Video: https://www.youtube.com/watch?v=FI91w7z-CsI
 
 from sqlalchemy import select
 from sqlalchemy.orm import (

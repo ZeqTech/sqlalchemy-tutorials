@@ -2,6 +2,7 @@
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
+# Related Video: https://www.youtube.com/watch?v=iosh_DWnliE
 
 from datetime import datetime
 

@@ -2,7 +2,7 @@
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
-
+# Related Video: https://www.youtube.com/watch?v=xRfupYowU-I
 
 from sqlalchemy import Column, ForeignKey, Integer, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker

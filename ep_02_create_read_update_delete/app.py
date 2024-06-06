@@ -2,6 +2,7 @@
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
+# Related Video: https://www.youtube.com/watch?v=f0-kEG37GE0
 
 from models import User, engine
 from sqlalchemy.orm import sessionmaker

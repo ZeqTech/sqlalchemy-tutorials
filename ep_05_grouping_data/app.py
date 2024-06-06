@@ -2,6 +2,7 @@
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
+# Related Video: https://www.youtube.com/watch?v=ftbYlej2xQY
 
 from models import User, engine
 from sqlalchemy import and_, func, not_, or_

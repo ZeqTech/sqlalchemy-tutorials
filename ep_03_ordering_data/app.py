@@ -1,10 +1,10 @@
-import random
-
 # =============================================================
 # |                 Created By: ZeqTech                       |
 # |         YouTube: https://www.youtube.com/@zeqtech         |
 # =============================================================
+# Related Video: https://www.youtube.com/watch?v=HY2GSa9aP_U
 
+import random
 from models import User, engine
 from sqlalchemy.orm import sessionmaker
 

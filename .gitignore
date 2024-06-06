@@ -2,7 +2,7 @@
 *.db
 **/__pycache__*
 screenshots/
-ep_1[4-9]*/
+later
 crash_course/
 .*x
 presentations/
